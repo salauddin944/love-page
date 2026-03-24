@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>Be Mine? 🥺💖</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,700;0,800;0,900;1,700&family=Pacifico&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --p1:#ff6bab; --p2:#e8437a; --p3:#ff9ec8; --p4:#ffd6e7;
+      --v1:#d4a0ff; --v2:#b97aff;
+      --y1:#ffe066; --y2:#ffca3a;
+      --m1:#b8f5da; --m2:#7fe8bc;
+      --s1:#b8e8ff; --s2:#7dd4f8;
+      --text:#3d1528; --mid:#8a3558;
+      --card-bg:rgba(255,255,255,0.9);
+      --shadow:rgba(232,67,122,0.25);
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html,body{width:100%;overflow-x:hidden}
+
+    body{
+      min-height:100vh;min-height:100dvh;
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+      font-family:'Nunito',sans-serif;
+      background:#fff0f9;
+      padding:clamp(14px,4vw,30px);
+      position:relative;
+      cursor:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='36' height='36'><text y='28' font-size='26'>💗</text></svg>") 18 18,auto;
+    }
+
+    /* ════ BACKGROUND ════ */
+    .bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+
+    /* gradient mesh */
+    .bg-mesh{
+      position:absolute;inset:0;
+      background:
+        radial-gradient(ellipse 65% 55% at 8% 8%,  #ffcce4 0%,transparent 68%),
+        radial-gradient(ellipse 60% 50% at 92% 92%, #e8c6ff 0%,transparent 68%),
+        radial-gradient(ellipse 45% 40% at 85% 10%, #ffd4a0 0%,transparent 65%),
+        radial-gradient(ellipse 50% 45% at 15% 88%, #b8f5da 0%,transparent 65%),
+        radial-gradient(ellipse 35% 30% at 50% 50%, #ffe0ef 0%,transparent 70%),
+        #fff0f9;
+      animation:meshBreath 10s ease-in-out infinite alternate;
+    }
+    @keyframes meshBreath{
+      from{opacity:.9;transform:scale(1)}
+      to  {opacity:1; transform:scale(1.04)}
+    }
+
+    /* polka dots */
+    .bg-dots{
+      position:absolute;inset:0;opacity:.28;
+      background-image:
+        radial-gradient(circle,#ff9ec4 1.2px,transparent 1.2px),
+        radial-gradient(circle,#c9a0ff 1.2px,transparent 1.2px),
+        radial-gradient(circle,#ffe066  1px,  transparent 1px);
+      background-size:34px 34px,52px 52px,68px 68px;
+      background-position:0 0,17px 17px,34px 8px;
+    }
+
+    /* animated clouds */
+    .cloud{
+      position:absolute;font-size:clamp(2rem,6vw,4.5rem);
+      opacity:.22;animation:cloudDrift linear infinite;
+      pointer-events:none;user-select:none;
+    }
+    .c1{top:6%; animation-duration:28s;animation-delay:0s}
+    .c2{top:20%;animation-duration:34s;animation-delay:-10s}
+    .c3{top:72%;animation-duration:30s;animation-delay:-18s}
+    .c4{top:85%;animation-duration:38s;animation-delay:-5s}
+    @keyframes cloudDrift{
+      from{transform:translateX(-200px)}
+      to  {transform:translateX(calc(100vw + 200px))}
+    }
+
+    /* ════ FLOATING PARTICLES ════ */
+    .particle{
+      position:fixed;pointer-events:none;z-index:2;opacity:0;
+      animation:floatUp linear infinite;user-select:none;
+    }
+    @keyframes floatUp{
+      0%  {transform:translateY(0) rotate(0deg) scale(.85);opacity:0}
+      6%  {opacity:.95}
+      88% {opacity:.65}
+      100%{transform:translateY(-110vh) rotate(420deg) scale(1.2);opacity:0}
+    }
+
+    /* ════ SPARKLE CURSOR BURST ════ */
+    .sparkle{
+      position:fixed;pointer-events:none;z-index:9999;
+      font-size:.9rem;
+      animation:sparklePop .8s cubic-bezier(.34,1.56,.64,1) forwards;
+    }
+    @keyframes sparklePop{
+      0%  {transform:scale(0) rotate(-20deg);opacity:1}
+      60% {transform:scale(1.3) rotate(10deg);opacity:.9}
+      100%{transform:scale(.1) translateY(-30px);opacity:0}
+    }
+
+    /* ════ CARD ════ */
+    .card{
+      position:relative;z-index:10;
+      background:var(--card-bg);
+      backdrop-filter:blur(32px);-webkit-backdrop-filter:blur(32px);
+      border:3px solid rgba(255,107,157,.22);
+      border-radius:clamp(28px,8vw,52px);
+      padding:clamp(32px,8vw,68px) clamp(26px,8vw,62px) clamp(30px,7vw,58px);
+      max-width:500px;width:100%;text-align:center;
+      box-shadow:
+        0 0 0 8px  rgba(255,182,215,.18),
+        0 0 0 18px rgba(255,182,215,.08),
+        0 0 0 28px rgba(255,182,215,.04),
+        0 22px 90px var(--shadow),
+        0 4px 18px rgba(255,107,157,.12);
+      animation:cardPop 1.1s cubic-bezier(.34,1.56,.64,1) forwards;
+      opacity:0;
+    }
+    @keyframes cardPop{
+      from{opacity:0;transform:scale(.74) translateY(40px) rotate(-2deg)}
+      to  {opacity:1;transform:scale(1)   translateY(0)    rotate(0deg)}
+    }
+
+    /* ════ STICKER CORNERS ════ */
+    .sticker{
+      position:absolute;pointer-events:none;
+      font-size:clamp(1.3rem,4.5vw,2.2rem);
+      filter:drop-shadow(0 3px 6px rgba(255,107,157,.4));
+      animation:stickerDance 2.8s ease-in-out infinite;
+    }
+    .s-tl{top:clamp(-22px,-5vw,-14px);left:clamp(12px,3.5vw,22px); animation-delay:0s}
+    .s-tr{top:clamp(-22px,-5vw,-14px);right:clamp(12px,3.5vw,22px);animation-delay:.7s}
+    .s-bl{bottom:clamp(-22px,-5vw,-14px);left:clamp(12px,3.5vw,22px); animation-delay:1.4s}
+    .s-br{bottom:clamp(-22px,-5vw,-14px);right:clamp(12px,3.5vw,22px);animation-delay:2.1s}
+    @keyframes stickerDance{
+      0%,100%{transform:rotate(-15deg) scale(1)}
+      25%    {transform:rotate(10deg)  scale(1.22)}
+      50%    {transform:rotate(-6deg)  scale(.95)}
+      75%    {transform:rotate(14deg)  scale(1.1)}
+    }
+
+    /* ════ KAWAII SVG BEAR ════ */
+    .bear-wrap{
+      position:relative;display:inline-block;
+      margin-bottom:clamp(8px,2.5vw,16px);
+    }
+    .bear-svg{
+      width:clamp(90px,24vw,160px);height:auto;
+      display:block;margin:0 auto;
+      animation:bearBounce 2s ease-in-out infinite;
+      filter:drop-shadow(0 8px 18px rgba(232,67,122,.35));
+    }
+    @keyframes bearBounce{
+      0%,100%{transform:translateY(0) rotate(-4deg) scale(1)}
+      30%    {transform:translateY(-14px) rotate(3deg) scale(1.05)}
+      60%    {transform:translateY(-6px) rotate(-2deg) scale(1.02)}
+    }
+    /* orbiting hearts */
+    .orb{
+      position:absolute;font-size:clamp(.7rem,2.2vw,1rem);
+      top:50%;left:50%;
+      animation:orbSpin linear infinite;
+      pointer-events:none;
+    }
+    .orb1{animation-duration:2.6s}
+    .orb2{animation-duration:3.8s;animation-delay:-1.4s}
+    .orb3{animation-duration:5s;  animation-delay:-3s}
+    @keyframes orbSpin{
+      from{transform:rotate(0deg) translateX(clamp(36px,9vw,58px)) rotate(0deg)}
+      to  {transform:rotate(360deg) translateX(clamp(36px,9vw,58px)) rotate(-360deg)}
+    }
+
+    /* ════ RAINBOW PILL TAG ════ */
+    .tag{
+      display:inline-block;
+      font-size:clamp(.58rem,2vw,.76rem);font-weight:900;
+      letter-spacing:.22em;text-transform:uppercase;
+      background:linear-gradient(90deg,#ffb3cc,#e8a0ff,#ffb3cc,#a0d8ff,#ffb3cc);
+      background-size:300% 100%;
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+      border:2px solid transparent;
+      border-radius:50px;padding:clamp(5px,1.5vw,8px) clamp(14px,4vw,22px);
+      margin-bottom:clamp(12px,3vw,18px);
+      position:relative;
+      animation:rainbowMove 4s linear infinite;
+    }
+    .tag::before{
+      content:'';position:absolute;inset:0;border-radius:50px;z-index:-1;
+      background:linear-gradient(90deg,#ffe0ef,#f0d0ff,#ffe0ef);
+      animation:tagBg 4s linear infinite;
+    }
+    @keyframes rainbowMove{0%{background-position:0%}100%{background-position:300%}}
+    @keyframes tagBg{0%,100%{background-position:0%}50%{background-position:100%}}
+
+    /* ════ HEADING ════ */
+    h1{
+      font-family:'Pacifico',cursive;
+      font-size:clamp(1.3rem,5.5vw,2.1rem);
+      color:var(--text);line-height:1.46;
+      margin-bottom:clamp(8px,2vw,14px);
+    }
+    h1 .rainbow-word{
+      background:linear-gradient(135deg,#e8437a,#ff9ec8,#d4a0ff,#7dd4f8,#e8437a);
+      background-size:300% 300%;
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+      animation:rainbowMove 3s linear infinite;
+      font-style:normal;
+    }
+
+    .sub{
+      font-size:clamp(.8rem,2.8vw,.96rem);
+      color:var(--mid);font-style:italic;font-weight:700;
+      line-height:1.65;margin-bottom:clamp(14px,4vw,24px);
+    }
+
+    /* ════ LOVE METER ════ */
+    .meter-wrap{margin-bottom:clamp(16px,4vw,26px)}
+    .meter-label{
+      font-size:clamp(.64rem,2.1vw,.78rem);font-weight:900;
+      color:var(--mid);letter-spacing:.16em;text-transform:uppercase;
+      margin-bottom:clamp(5px,1.5vw,8px);
+    }
+    .meter-bar{
+      width:100%;height:clamp(11px,2.8vw,16px);
+      background:rgba(255,182,215,.22);border-radius:99px;overflow:hidden;
+      border:2px solid rgba(255,107,157,.2);
+      box-shadow:inset 0 2px 6px rgba(232,67,122,.1);
+    }
+    .meter-fill{
+      height:100%;width:0%;border-radius:99px;
+      background:linear-gradient(90deg,#ffb3cc,#ff6bab,#e8437a,#d4a0ff,#7dd4f8);
+      background-size:300% 100%;
+      box-shadow:0 0 12px rgba(232,67,122,.5);
+      animation:meterGrow 2s .9s cubic-bezier(.34,1.2,.64,1) forwards,
+                rainbowMove 3s linear infinite;
+    }
+    @keyframes meterGrow{to{width:100%}}
+
+    /* meter emoji markers */
+    .meter-marks{
+      display:flex;justify-content:space-between;
+      margin-top:4px;
+      font-size:clamp(.55rem,1.8vw,.7rem);
+    }
+
+    /* ════ CUTE DIVIDER ════ */
+    .divider{
+      display:flex;align-items:center;gap:8px;
+      margin-bottom:clamp(20px,5vw,32px);
+    }
+    .dline{
+      flex:1;height:2px;border-radius:4px;
+      background:linear-gradient(90deg,transparent,#ffb3d1 30%,#c9a0ff 70%,transparent);
+    }
+    .dcenter{font-size:clamp(.78rem,2.6vw,1rem);letter-spacing:4px}
+
+    /* ════ BUTTONS ════ */
+    .buttons{
+      display:flex;gap:clamp(10px,3vw,16px);
+      justify-content:center;flex-wrap:wrap;
+    }
+    button{
+      font-family:'Nunito',sans-serif;font-weight:900;
+      border:none;cursor:pointer;border-radius:50px;
+      transition:all .3s cubic-bezier(.34,1.56,.64,1);
+      position:relative;overflow:hidden;
+      -webkit-tap-highlight-color:transparent;
+      white-space:nowrap;letter-spacing:.03em;
+    }
+    button::after{
+      content:'';position:absolute;inset:0;
+      background:radial-gradient(circle at center,rgba(255,255,255,.5) 0%,transparent 65%);
+      transform:scale(0);opacity:0;transition:transform .4s,opacity .4s;
+    }
+    button:active::after{transform:scale(2.5);opacity:1}
+
+    .yes-btn{
+      background:linear-gradient(135deg,#ff85b8 0%,#e8437a 45%,#ff6bab 100%);
+      background-size:200% 200%;
+      color:#fff;
+      padding:clamp(13px,4vw,19px) clamp(30px,8.5vw,56px);
+      font-size:clamp(.92rem,3.4vw,1.16rem);
+      box-shadow:0 6px 28px rgba(232,67,122,.48),0 2px 8px rgba(232,67,122,.22),inset 0 1px 0 rgba(255,255,255,.3);
+      animation:shimmer 3s ease infinite, btnIn .8s .65s cubic-bezier(.34,1.56,.64,1) both;
+    }
+    @keyframes shimmer{
+      0%  {background-position:0% 50%}
+      50% {background-position:100% 50%}
+      100%{background-position:0% 50%}
+    }
+    @keyframes btnIn{
+      from{opacity:0;transform:translateY(20px) scale(.88)}
+      to  {opacity:1;transform:translateY(0) scale(1)}
+    }
+    .yes-btn:hover{
+      transform:translateY(-6px) scale(1.08);
+      box-shadow:0 16px 44px rgba(232,67,122,.58),0 4px 14px rgba(232,67,122,.26);
+    }
+    .yes-btn:active{transform:scale(.93)}
+
+    .no-btn{
+      background:rgba(255,182,215,.2);
+      color:var(--mid);
+      border:2.5px dashed rgba(255,107,157,.3);
+      padding:clamp(11px,3.5vw,17px) clamp(22px,6vw,40px);
+      font-size:clamp(.86rem,2.8vw,1rem);
+      transition:all .3s ease,opacity .4s,transform .3s;
+    }
+    .no-btn:hover{background:rgba(255,182,215,.4);border-style:solid}
+
+    /* ════ YES SCREEN ════ */
+    #yesScreen{display:none}
+    #yesScreen.active{
+      display:flex;flex-direction:column;align-items:center;
+      gap:clamp(12px,3vw,20px);
+      animation:cardPop .9s cubic-bezier(.34,1.56,.64,1) forwards;
+    }
+
+    .yes-bear{
+      width:clamp(100px,28vw,180px);height:auto;display:block;margin:0 auto;
+      animation:bearBounce 1.8s ease-in-out infinite,heartPop .7s cubic-bezier(.34,1.9,.64,1) both;
+      filter:drop-shadow(0 8px 20px rgba(232,67,122,.45));
+    }
+    @keyframes heartPop{
+      0%  {transform:scale(0) rotate(-18deg);opacity:0}
+      100%{transform:scale(1) rotate(0);opacity:1}
+    }
+
+    .yes-title{
+      font-family:'Pacifico',cursive;
+      font-size:clamp(2rem,9vw,3.6rem);
+      background:linear-gradient(135deg,#e8437a,#ff6bab,#d4a0ff,#7dd4f8);
+      background-size:300% 300%;
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+      line-height:1.2;
+      animation:rainbowMove 3s linear infinite;
+    }
+
+    .yes-msg{
+      font-size:clamp(.82rem,2.8vw,.97rem);
+      color:var(--mid);font-style:italic;font-weight:700;
+      line-height:1.74;max-width:330px;
+    }
+
+    .forever-badge{
+      display:inline-flex;align-items:center;gap:8px;
+      background:linear-gradient(135deg,#ffd6e7,#f0c6ff,#d0f0ff,#ffd6e7);
+      background-size:300% 100%;
+      border-radius:50px;
+      padding:clamp(7px,2.5vw,12px) clamp(18px,5.5vw,32px);
+      font-size:clamp(.74rem,2.5vw,.9rem);font-weight:900;
+      color:var(--p2);letter-spacing:.07em;
+      box-shadow:0 4px 20px rgba(232,67,122,.22);
+      animation:badgePop .55s .5s cubic-bezier(.34,1.6,.64,1) both,rainbowMove 4s linear infinite;
+    }
+    @keyframes badgePop{
+      from{transform:scale(0) rotate(-10deg);opacity:0}
+      to  {transform:scale(1) rotate(0);opacity:1}
+    }
+
+    /* flying hearts on yes */
+    .fly-heart{
+      position:fixed;pointer-events:none;z-index:9998;
+      animation:flyUp 1.4s ease forwards;
+    }
+    @keyframes flyUp{
+      0%  {transform:translateY(0) scale(1);opacity:1}
+      100%{transform:translateY(-80vh) scale(1.6);opacity:0}
+    }
+
+    /* ════ CONFETTI ════ */
+    .confetti{
+      position:fixed;pointer-events:none;z-index:999;
+      animation:cFall ease-in forwards;
+    }
+    @keyframes cFall{
+      0%  {opacity:1;transform:translateY(-15px) rotate(0deg) scale(1)}
+      100%{opacity:0;transform:translateY(112vh) rotate(900deg) scale(.18)}
+    }
+
+    /* ════ SAFE AREA ════ */
+    @supports(padding:max(0px)){
+      body{
+        padding-bottom:max(clamp(14px,4vw,30px),env(safe-area-inset-bottom));
+        padding-top:   max(clamp(14px,4vw,30px),env(safe-area-inset-top));
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background layers -->
+  <div class="bg">
+    <div class="bg-mesh"></div>
+    <div class="bg-dots"></div>
+    <div class="cloud c1">☁️</div>
+    <div class="cloud c2">☁️</div>
+    <div class="cloud c3">☁️</div>
+    <div class="cloud c4">☁️</div>
+  </div>
+
+  <!-- Card -->
+  <div class="card" id="mainCard">
+
+    <!-- Corner stickers -->
+    <span class="sticker s-tl">🌸</span>
+    <span class="sticker s-tr">⭐</span>
+    <span class="sticker s-bl">🍬</span>
+    <span class="sticker s-br">🎀</span>
+
+    <!-- ── QUESTION SCREEN ── -->
+    <div id="questionScreen">
+
+      <!-- Kawaii bear SVG -->
+      <div class="bear-wrap">
+        <svg class="bear-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <!-- ears -->
+          <circle cx="55"  cy="62" r="28" fill="#ffb3cc"/>
+          <circle cx="145" cy="62" r="28" fill="#ffb3cc"/>
+          <circle cx="55"  cy="62" r="16" fill="#ff85a8"/>
+          <circle cx="145" cy="62" r="16" fill="#ff85a8"/>
+          <!-- head -->
+          <ellipse cx="100" cy="108" rx="68" ry="65" fill="#ffe0ef"/>
+          <!-- blush -->
+          <ellipse cx="68"  cy="122" rx="18" ry="11" fill="#ffb3cc" opacity=".7"/>
+          <ellipse cx="132" cy="122" rx="18" ry="11" fill="#ffb3cc" opacity=".7"/>
+          <!-- eyes -->
+          <ellipse cx="82"  cy="102" rx="9"  ry="10" fill="#3d1528"/>
+          <ellipse cx="118" cy="102" rx="9"  ry="10" fill="#3d1528"/>
+          <!-- eye shine -->
+          <circle cx="86"  cy="99" r="3.5" fill="#fff"/>
+          <circle cx="122" cy="99" r="3.5" fill="#fff"/>
+          <!-- tiny eye dots -->
+          <circle cx="80"  cy="105" r="2" fill="#fff" opacity=".6"/>
+          <circle cx="116" cy="105" r="2" fill="#fff" opacity=".6"/>
+          <!-- nose + mouth -->
+          <ellipse cx="100" cy="118" rx="8"  ry="6"  fill="#e8437a"/>
+          <path d="M93 124 Q100 132 107 124" stroke="#e8437a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <!-- tiny heart on forehead -->
+          <path d="M95 82 C95 78 89 74 89 80 C89 84 95 90 95 90 C95 90 101 84 101 80 C101 74 95 78 95 82Z" fill="#e8437a" opacity=".85"/>
+          <!-- body -->
+          <ellipse cx="100" cy="175" rx="50" ry="38" fill="#ffe0ef"/>
+          <!-- tummy circle -->
+          <ellipse cx="100" cy="176" rx="28" ry="22" fill="#ffb3cc" opacity=".5"/>
+          <!-- arms -->
+          <ellipse cx="50"  cy="168" rx="18" ry="10" fill="#ffe0ef" transform="rotate(-30 50 168)"/>
+          <ellipse cx="150" cy="168" rx="18" ry="10" fill="#ffe0ef" transform="rotate(30 150 168)"/>
+          <!-- paws -->
+          <circle cx="38"  cy="174" r="10" fill="#ffb3cc"/>
+          <circle cx="162" cy="174" r="10" fill="#ffb3cc"/>
+          <!-- holding heart -->
+          <path d="M94 175 C94 170 86 165 86 172 C86 177 94 183 94 183 C94 183 102 177 102 172 C102 165 94 170 94 175Z" fill="#e8437a"/>
+        </svg>
+        <span class="orb orb1">💗</span>
+        <span class="orb orb2">✨</span>
+        <span class="orb orb3">🌸</span>
+      </div>
+
+      <span class="tag">💌 a special message for you 💌</span>
+
+      <h1>I've fallen for you—will you be my <em class="rainbow-word">special someone?</em> 💘</h1>
+
+      <p class="sub">You make my heart skip a beat every single day 🥺💕</p>
+
+      <div class="meter-wrap">
+        <div class="meter-label">💖 My love for you</div>
+        <div class="meter-bar"><div class="meter-fill" id="meterFill"></div></div>
+        <div class="meter-marks">
+          <span>🤍</span><span>🩷</span><span>💗</span><span>💖</span><span>💝</span>
+        </div>
+      </div>
+
+      <div class="divider">
+        <div class="dline"></div>
+        <span class="dcenter">🌸💗🌸</span>
+        <div class="dline"></div>
+      </div>
+
+      <div class="buttons">
+        <button class="yes-btn" id="yesBtn" onclick="handleYes()">Yes 💖</button>
+        <button class="no-btn"  id="noBtn"  onclick="handleNo()">No 💔</button>
+      </div>
+
+    </div><!-- /questionScreen -->
+
+    <!-- ── YES SCREEN ── -->
+    <div id="yesScreen">
+
+      <!-- Happy bear SVG -->
+      <svg class="yes-bear" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="55"  cy="62" r="28" fill="#ffb3cc"/>
+        <circle cx="145" cy="62" r="28" fill="#ffb3cc"/>
+        <circle cx="55"  cy="62" r="16" fill="#ff85a8"/>
+        <circle cx="145" cy="62" r="16" fill="#ff85a8"/>
+        <ellipse cx="100" cy="108" rx="68" ry="65" fill="#ffe0ef"/>
+        <ellipse cx="68"  cy="122" rx="18" ry="11" fill="#ffb3cc" opacity=".75"/>
+        <ellipse cx="132" cy="122" rx="18" ry="11" fill="#ffb3cc" opacity=".75"/>
+        <!-- happy crescent eyes -->
+        <path d="M73 100 Q82 92 91 100" stroke="#3d1528" stroke-width="4" fill="none" stroke-linecap="round"/>
+        <path d="M109 100 Q118 92 127 100" stroke="#3d1528" stroke-width="4" fill="none" stroke-linecap="round"/>
+        <!-- wide smile -->
+        <path d="M80 122 Q100 140 120 122" stroke="#e8437a" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+        <ellipse cx="100" cy="117" rx="7"  ry="5" fill="#e8437a"/>
+        <!-- sparkles on head -->
+        <text x="28"  y="50" font-size="18">✨</text>
+        <text x="155" y="52" font-size="16">⭐</text>
+        <!-- body -->
+        <ellipse cx="100" cy="175" rx="50" ry="38" fill="#ffe0ef"/>
+        <ellipse cx="100" cy="176" rx="28" ry="22" fill="#ffb3cc" opacity=".5"/>
+        <ellipse cx="50"  cy="168" rx="18" ry="10" fill="#ffe0ef" transform="rotate(-30 50 168)"/>
+        <ellipse cx="150" cy="168" rx="18" ry="10" fill="#ffe0ef" transform="rotate(30 150 168)"/>
+        <circle cx="38"  cy="174" r="10" fill="#ffb3cc"/>
+        <circle cx="162" cy="174" r="10" fill="#ffb3cc"/>
+        <!-- big heart held up -->
+        <path d="M87 168 C87 158 74 150 74 162 C74 171 87 181 87 181 C87 181 100 171 100 162 C100 150 87 158 87 168Z" fill="#e8437a" transform="scale(1.3) translate(-14,-8)"/>
+      </svg>
+
+      <div class="yes-title">Love you 🥹</div>
+      <p class="yes-msg">
+        I still can't believe you said yes…<br>
+        it feels like a dream I don't ever<br>
+        want to wake up from ❤️
+      </p>
+      <div class="divider" style="width:100%;margin:2px 0 4px">
+        <div class="dline"></div>
+        <span class="dcenter">💗✨💗</span>
+        <div class="dline"></div>
+      </div>
+      <div class="forever-badge">🌹 Forever &amp; always, yours 🌹</div>
+
+    </div><!-- /yesScreen -->
+
+  </div><!-- /card -->
+
+  <script>
+    /* ── particles ── */
+    const PS=['🌸','💗','🌺','✨','💝','🌹','💞','🍓','🦋','💫','🌷','🩷','🎀','💮','🫧','🍬','🌈','🎊','💐','🍭'];
+    function makeParticles(n=30){
+      for(let i=0;i<n;i++){
+        const el=document.createElement('div');
+        el.className='particle';
+        el.textContent=PS[Math.floor(Math.random()*PS.length)];
+        el.style.cssText=`left:${Math.random()*100}vw;bottom:-50px;font-size:${.65+Math.random()*1.35}rem;animation-duration:${6+Math.random()*12}s;animation-delay:${Math.random()*16}s`;
+        document.body.appendChild(el);
+      }
+    }
+    makeParticles();
+
+    /* ── sparkle cursor trail ── */
+    const spEmoji=['💗','💖','💕','🩷','✨','🌸','💫','⭐','🌟'];
+    let spLast=0;
+    document.addEventListener('mousemove',e=>{
+      const now=Date.now();
+      if(now-spLast<70)return;spLast=now;
+      if(Math.random()>.52)return;
+      const s=document.createElement('div');
+      s.className='sparkle';
+      s.textContent=spEmoji[Math.floor(Math.random()*spEmoji.length)];
+      s.style.cssText=`left:${e.clientX-12}px;top:${e.clientY-12}px;font-size:${.75+Math.random()*.7}rem`;
+      document.body.appendChild(s);
+      setTimeout(()=>s.remove(),900);
+    });
+
+    /* touch sparkle */
+    document.addEventListener('touchmove',e=>{
+      const t=e.touches[0];
+      if(Math.random()>.6)return;
+      const s=document.createElement('div');
+      s.className='sparkle';
+      s.textContent=spEmoji[Math.floor(Math.random()*spEmoji.length)];
+      s.style.cssText=`left:${t.clientX-12}px;top:${t.clientY-12}px;font-size:${.8+Math.random()*.65}rem`;
+      document.body.appendChild(s);
+      setTimeout(()=>s.remove(),900);
+    },{passive:true});
+
+    /* ── no button ── */
+    let noCount=0;
+    const noLines=['No 💔','Are you sure? 🥺','Please say yes 😢','I\'ll bring chocolates 🍫','Don\'t break my heart 💔','Come on, be my Valentine 😭','Pretty please? 🙏','👉👈 pls?','My heart hurts 🥹','nooooo 😭'];
+
+    function handleNo(){
+      const nb=document.getElementById('noBtn');
+      const yb=document.getElementById('yesBtn');
+      noCount++;
+      nb.textContent=noLines[noCount%noLines.length];
+      const fs=parseFloat(window.getComputedStyle(yb).fontSize);
+      if(fs<25)yb.style.fontSize=`${fs*1.26}px`;
+      nb.style.opacity=`${Math.max(.12,1-noCount*.1)}`;
+      nb.style.transform=`scale(${Math.max(.55,1-noCount*.045)})`;
+      /* tiny sad burst */
+      const rect=nb.getBoundingClientRect();
+      ['💔','😢','🥺','😭'].forEach((e,i)=>{
+        const d=document.createElement('div');
+        d.style.cssText=`position:fixed;pointer-events:none;z-index:9999;font-size:1.1rem;left:${rect.left+rect.width/2+(-20+i*14)}px;top:${rect.top-10}px;animation:cFall ${.9+Math.random()*.4}s ease forwards;animation-delay:${i*.07}s`;
+        d.textContent=e;
+        document.body.appendChild(d);
+        setTimeout(()=>d.remove(),1600);
+      });
+    }
+
+    /* ── yes button ── */
+    function handleYes(){
+      document.getElementById('questionScreen').style.display='none';
+      document.getElementById('yesScreen').classList.add('active');
+      spawnConfetti();
+      spawnFlyHearts();
+      makeParticles(24);
+    }
+
+    /* ── confetti ── */
+    function spawnConfetti(){
+      const cols=['#ff6bab','#ffd6e7','#ffb3cc','#f9c6ff','#ffe0b2','#fff9c4','#b8f5da','#e8437a','#fff','#b8e8ff','#ffe066'];
+      const shapes=['circle','square','pill'];
+      const eConf=['💖','🌸','⭐','✨','🩷','🎊','💝'];
+      for(let i=0;i<180;i++){
+        const c=document.createElement('div');
+        c.className='confetti';
+        if(i%5===0){
+          c.textContent=eConf[Math.floor(Math.random()*eConf.length)];
+          c.style.cssText=`left:${4+Math.random()*92}vw;top:${-30+Math.random()*60}vh;font-size:${.8+Math.random()*1.1}rem;animation-delay:${Math.random()*1}s;animation-duration:${1.8+Math.random()*2.2}s`;
+        } else {
+          const sh=shapes[Math.floor(Math.random()*shapes.length)];
+          const w=5+Math.random()*12;
+          c.style.cssText=`left:${4+Math.random()*92}vw;top:${-30+Math.random()*60}vh;width:${w}px;height:${sh==='pill'?w*2.5:w}px;background:${cols[Math.floor(Math.random()*cols.length)]};border-radius:${sh==='circle'?'50%':sh==='pill'?'99px':'4px'};animation-delay:${Math.random()*1}s;animation-duration:${1.7+Math.random()*2.2}s`;
+        }
+        document.body.appendChild(c);
+        setTimeout(()=>c.remove(),4500);
+      }
+    }
+
+    /* ── flying hearts ── */
+    function spawnFlyHearts(){
+      for(let i=0;i<20;i++){
+        const h=document.createElement('div');
+        h.className='fly-heart';
+        h.textContent=['💖','💗','💝','🩷','❤️'][Math.floor(Math.random()*5)];
+        h.style.cssText=`left:${10+Math.random()*80}vw;top:${40+Math.random()*40}vh;font-size:${1.2+Math.random()*1.8}rem;animation-delay:${Math.random()*.8}s;animation-duration:${1.2+Math.random()*.8}s`;
+        document.body.appendChild(h);
+        setTimeout(()=>h.remove(),2500);
+      }
+    }
+  </script>
+</body>
+</html>
